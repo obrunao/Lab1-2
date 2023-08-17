@@ -1,0 +1,10 @@
+1)
+
+QoS 0 : A mensagem é entregue uma vez, e sem confirmação.
+QoS 1 : A mensagem é entregue pelo menos uma vez, e o receptor confirma o recebimento.
+QoS 2 : A mensagem é entregue apenas uma vez, sem duplicações.
+
+2)
+
+# : Corresponde a tudo em um tópico. Exemplo: "temperatura/#".
++ : Corresponde a uma parte de um tópico. Exemplo: "temperatura/+".
