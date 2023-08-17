@@ -1,0 +1,740 @@
+[
+    {
+        "id": "5f3c6ed033557c9f",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8a531e5735f943b1",
+        "type": "inject",
+        "z": "5f3c6ed033557c9f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 360,
+        "wires": [
+            [
+                "c0f58e2dab2fca77",
+                "1524e6337e7e1881"
+            ]
+        ]
+    },
+    {
+        "id": "1524e6337e7e1881",
+        "type": "http request",
+        "z": "5f3c6ed033557c9f",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "body",
+        "url": "https://api.openweathermap.org/data/2.5/weather?q=Sao+Paulo,BR&appid=0e199ebe4ed2f029c7729624c12f89a5",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 250,
+        "y": 260,
+        "wires": [
+            [
+                "93719597ee3096e9"
+            ]
+        ]
+    },
+    {
+        "id": "6d40a110d4e7d3f8",
+        "type": "change",
+        "z": "5f3c6ed033557c9f",
+        "name": "Temp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.main.temp",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 320,
+        "wires": [
+            [
+                "3708595151dae79e",
+                "c3acdf9519974a7b"
+            ]
+        ]
+    },
+    {
+        "id": "45d0f24ee7eeab4e",
+        "type": "function",
+        "z": "5f3c6ed033557c9f",
+        "name": "function 1",
+        "func": "var dadosjson = msg.payload\nvar temperatura = dadosjson.main.temp\nvar max = dadosjson.main.temp_max\nvar min = dadosjson.main.temp_min\nvar wind = dadosjson.wind.speed\n\nvar dadosExtraidos = {temperatura:temperatura, max:max, min:min, wind:wind}\n\nmsg.payload = dadosExtraidos\n\n\n\n\n\n\n\n\n\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "727130966c137c8b",
+        "type": "change",
+        "z": "5f3c6ed033557c9f",
+        "name": "feels_like",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.main.feels_like",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 380,
+        "wires": [
+            [
+                "f84ebf53d9231c27",
+                "c3acdf9519974a7b"
+            ]
+        ]
+    },
+    {
+        "id": "ae34ce644fdc4e7b",
+        "type": "change",
+        "z": "5f3c6ed033557c9f",
+        "name": "temp_min",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.main.temp_min",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 440,
+        "wires": [
+            [
+                "ca96733cdadfca31",
+                "c3acdf9519974a7b"
+            ]
+        ]
+    },
+    {
+        "id": "267767d333f7fca2",
+        "type": "change",
+        "z": "5f3c6ed033557c9f",
+        "name": "humidity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.main.humidity",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 560,
+        "wires": [
+            [
+                "c633646d0be4fcfa",
+                "c3acdf9519974a7b"
+            ]
+        ]
+    },
+    {
+        "id": "d44acfb1fb05a079",
+        "type": "change",
+        "z": "5f3c6ed033557c9f",
+        "name": "wind_speed",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.wind.speed",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 620,
+        "wires": [
+            [
+                "2ac70f206a0f334a",
+                "c3acdf9519974a7b"
+            ]
+        ]
+    },
+    {
+        "id": "2ac70f206a0f334a",
+        "type": "ui_gauge",
+        "z": "5f3c6ed033557c9f",
+        "name": "",
+        "group": "8d64a661461f1fa4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Vento São Paulo",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1070,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "c794a2ede1a7b754",
+        "type": "change",
+        "z": "5f3c6ed033557c9f",
+        "name": "temp_max",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.main.temp_max",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 500,
+        "wires": [
+            [
+                "bd1fcdab8a671195",
+                "c3acdf9519974a7b"
+            ]
+        ]
+    },
+    {
+        "id": "f84ebf53d9231c27",
+        "type": "ui_gauge",
+        "z": "5f3c6ed033557c9f",
+        "name": "",
+        "group": "8360bbfc64472c0c",
+        "order": 6,
+        "width": "6",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Sensação São Paulo",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1040,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "bd1fcdab8a671195",
+        "type": "ui_gauge",
+        "z": "5f3c6ed033557c9f",
+        "name": "",
+        "group": "8360bbfc64472c0c",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temp Max São Paulo",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1060,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "c0f58e2dab2fca77",
+        "type": "http request",
+        "z": "5f3c6ed033557c9f",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "body",
+        "url": "https://api.openweathermap.org/data/2.5/weather?q=London&appid=0e199ebe4ed2f029c7729624c12f89a5",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 290,
+        "y": 400,
+        "wires": [
+            [
+                "5a48e0156b6e8fb6"
+            ]
+        ]
+    },
+    {
+        "id": "4d6dd2002417b989",
+        "type": "json",
+        "z": "5f3c6ed033557c9f",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 590,
+        "y": 340,
+        "wires": [
+            [
+                "6d40a110d4e7d3f8",
+                "727130966c137c8b",
+                "ae34ce644fdc4e7b",
+                "c794a2ede1a7b754",
+                "267767d333f7fca2",
+                "d44acfb1fb05a079",
+                "c3acdf9519974a7b"
+            ]
+        ]
+    },
+    {
+        "id": "93719597ee3096e9",
+        "type": "delay",
+        "z": "5f3c6ed033557c9f",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 460,
+        "y": 280,
+        "wires": [
+            [
+                "4d6dd2002417b989"
+            ]
+        ]
+    },
+    {
+        "id": "5a48e0156b6e8fb6",
+        "type": "delay",
+        "z": "5f3c6ed033557c9f",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 460,
+        "y": 400,
+        "wires": [
+            [
+                "07427017f404e828"
+            ]
+        ]
+    },
+    {
+        "id": "c633646d0be4fcfa",
+        "type": "ui_gauge",
+        "z": "5f3c6ed033557c9f",
+        "name": "",
+        "group": "8360bbfc64472c0c",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidade São Paulo",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1060,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "ca96733cdadfca31",
+        "type": "ui_gauge",
+        "z": "5f3c6ed033557c9f",
+        "name": "",
+        "group": "8360bbfc64472c0c",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temp_Min São Paulo",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1060,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "3708595151dae79e",
+        "type": "ui_text",
+        "z": "5f3c6ed033557c9f",
+        "group": "8360bbfc64472c0c",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Temperatura São Paulo",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1010,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "07427017f404e828",
+        "type": "json",
+        "z": "5f3c6ed033557c9f",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 430,
+        "y": 560,
+        "wires": [
+            [
+                "79ddaf444372e4a1",
+                "3812f8ba63d398c4"
+            ]
+        ]
+    },
+    {
+        "id": "79ddaf444372e4a1",
+        "type": "change",
+        "z": "5f3c6ed033557c9f",
+        "name": "Temp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.main.temp",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 640,
+        "wires": [
+            [
+                "88aa9bd261d45ae7",
+                "c3acdf9519974a7b"
+            ]
+        ]
+    },
+    {
+        "id": "88aa9bd261d45ae7",
+        "type": "ui_text",
+        "z": "5f3c6ed033557c9f",
+        "group": "8360bbfc64472c0c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Temperatura Londres",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 740,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "3983923f061299f3",
+        "type": "ui_gauge",
+        "z": "5f3c6ed033557c9f",
+        "name": "",
+        "group": "8360bbfc64472c0c",
+        "order": 2,
+        "width": "6",
+        "height": "3",
+        "gtype": "gage",
+        "title": "Sensação Londres",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 730,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "3812f8ba63d398c4",
+        "type": "change",
+        "z": "5f3c6ed033557c9f",
+        "name": "feels_like",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.main.feels_like",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 740,
+        "wires": [
+            [
+                "3983923f061299f3",
+                "c3acdf9519974a7b"
+            ]
+        ]
+    },
+    {
+        "id": "c3acdf9519974a7b",
+        "type": "mqtt out",
+        "z": "5f3c6ed033557c9f",
+        "name": "",
+        "topic": "BrunoFermino/fiap",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "bf0ab817557e067b",
+        "x": 930,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "fb4b8aecfbba26b3",
+        "type": "mqtt in",
+        "z": "5f3c6ed033557c9f",
+        "name": "",
+        "topic": "BrunoFermino/fiap",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "bf0ab817557e067b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 290,
+        "y": 100,
+        "wires": [
+            [
+                "6f08fc491683a13d"
+            ]
+        ]
+    },
+    {
+        "id": "6f08fc491683a13d",
+        "type": "debug",
+        "z": "5f3c6ed033557c9f",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "8d64a661461f1fa4",
+        "type": "ui_group",
+        "name": "Vento",
+        "tab": "35249378888e5af6",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "8360bbfc64472c0c",
+        "type": "ui_group",
+        "name": "Temperatura",
+        "tab": "35249378888e5af6",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "bf0ab817557e067b",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "ProjetoBrunao",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "35249378888e5af6",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
